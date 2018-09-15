@@ -4,12 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="10dp">
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    android:padding="16dp">
     
     <LinearLayout
         android:layout_width="0dp"
@@ -19,17 +14,19 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/name_food_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/description_food_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/name_food_tv"
+        android:id="@+id/calories_food_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
