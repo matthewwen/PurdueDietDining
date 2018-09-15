@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
 
+        String name = ""; 
     }
 
     @Override
