@@ -26,6 +26,6 @@ public class DataContract {
         public static final int COLUMN_ID_ARRAY_INDEX = 0;
         public static final int COLUMN_TIME_ADDED_ARRAY_INDEX = 1;
         public static final int COLUMN_FOOD_NAME_ARRAY_INDEX = 2;
-        
+
     }
 }
