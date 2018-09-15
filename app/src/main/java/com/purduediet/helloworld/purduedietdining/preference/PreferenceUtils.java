@@ -23,7 +23,7 @@ public class PreferenceUtils {
 
     public static int getCaloriesLimit(Context context){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getInt(CALORIES_TAG_LIMIT, 1000);
+        return preferences.getInt(CALORIES_TAG_LIMIT, DEFAULT_CALORIES_COUNT);
     }
 
 }
