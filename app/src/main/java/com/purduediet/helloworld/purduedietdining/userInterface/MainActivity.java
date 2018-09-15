@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.purduediet.helloworld.purduedietdining.CalendarActivity;
 import com.purduediet.helloworld.purduedietdining.R;
 import com.purduediet.helloworld.purduedietdining.adapter.MainAdapter;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         int itemID = item.getItemId();
         switch (itemID){
             case R.id.action_calendar: {
+                Intent intent = new Intent(this, CalendarActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.action_settings: {
@@ -50,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
 
-        String name = ""; 
     }
 
     @Override
