@@ -1,6 +1,7 @@
 package com.purduediet.helloworld.purduedietdining.adapter;
 
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,12 +31,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
         return new ViewModel(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewModel viewModel, int i) {
-        ItemFood food = allItems.get(i);
+        ItemFood food;
+        food = allItems.get(i);
         viewModel.mNameTv.setText(food.getName());
         viewModel.mDescpritionTv.setText(food.getDescription());
-        viewModel.mCaloriesTv.setText(food.getCalories());
+        viewModel.mCaloriesTv.setText(Integer.toString(food.getCalories()));
     }
 
     @Override
