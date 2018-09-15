@@ -1,6 +1,7 @@
 package com.purduediet.helloworld.purduedietdining.adapter;
 
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,11 +12,13 @@ import android.widget.TextView;
 import com.purduediet.helloworld.purduedietdining.R;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
 
-    ArrayList<ItemFood> allItems;
+    private ArrayList<ItemFood> allItems;
 
     public MainAdapter(ArrayList<ItemFood> allItems){
         this.allItems = allItems;
@@ -28,10 +31,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
         return new ViewModel(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewModel viewModel, int i) {
-        ItemFood food = allItems.get(i);
-        viewModel.mTextView.setText(food.getName());
+        ItemFood food;
+        food = allItems.get(i);
+        viewModel.mNameTv.setText(food.getName());
+        viewModel.mDescpritionTv.setText(food.getDescription());
+        viewModel.mCaloriesTv.setText(Integer.toString(food.getCalories()));
     }
 
     @Override
@@ -41,11 +48,15 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
 
     class ViewModel extends RecyclerView.ViewHolder{
 
-        TextView mTextView;
+        TextView mNameTv;
+        TextView mDescpritionTv;
+        TextView mCaloriesTv;
 
         public ViewModel(@NonNull View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.name_food_tv);
+            mNameTv = itemView.findViewById(R.id.name_food_tv);
+            mDescpritionTv = itemView.findViewById(R.id.description_food_tv);
+            mCaloriesTv = itemView.findViewById(R.id.calories_food_tv);
         }
     }
 }
