@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<ItemFood> allItemFood = new ArrayList<>();
         allItemFood.add(new ItemFood("Hamburger"));
         allItemFood.add(new ItemFood("Pizza"));
+        allItemFood.add(new ItemFood("Pasta"));
 
         MainAdapter mAdapter = new MainAdapter(allItemFood);
         RecyclerView recyclerView = findViewById(R.id.main_view_rv);
