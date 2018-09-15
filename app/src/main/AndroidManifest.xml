@@ -23,10 +23,16 @@
             android:name=".userInterface.ItemFoodActivity"
             android:label="@string/title_activity_item_food"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".userInterface.DiningCourtActivity"
             android:label="@string/title_activity_dining_court"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <provider
+            android:authorities="com.purduediet.helloworld.purduedietdining.database.DataProvider"
+            android:name=".database.DataProvider"/>
+
     </application>
 
 </manifest>
