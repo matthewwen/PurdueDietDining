@@ -1,4 +1,4 @@
-package com.purduediet.helloworld.purduedietdining;
+package com.purduediet.helloworld.purduedietdining.preference;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
