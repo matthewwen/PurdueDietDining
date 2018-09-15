@@ -16,12 +16,38 @@
         android:padding="16dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="53dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/large_text" />
+            android:text="Dining Halls"
+            android:layout_marginBottom="20dp"/>
 
-        
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Earhart"
+            android:layout_marginBottom="10dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ford"
+            android:layout_marginBottom="10dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hillenbrand"
+            android:layout_marginBottom="10dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wiley"
+            android:layout_marginBottom="10dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Windsor" />
+
+    
 
     </LinearLayout>
 
