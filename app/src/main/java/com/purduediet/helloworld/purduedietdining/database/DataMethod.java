@@ -12,6 +12,6 @@ public class DataMethod {
 
     public static long getCurrentTime(Context context){
         long currentTime = Calendar.getInstance().getTimeInMillis();
-        return currentTime - currentTime % NUM_MILI_SEC; 
+        return currentTime - currentTime % NUM_MILI_SEC;
     }
 }
