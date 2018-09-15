@@ -5,9 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -22,7 +20,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId(); 
+        int itemID = item.getItemId();
+        switch (itemID){
+            case R.id.action_calendar: {
+                break;
+            }
+            case R.id.action_settings: {
+                Intent intent = new Intent(this,SettingsActivity.class);
+                startActivity(intent);
+                break;
+            }
+        }
         return true;
     }
 
@@ -31,9 +39,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<ItemFood> allItems = new ArrayList<>();
+        ArrayList<ItemFood> allItemFood = new ArrayList<>();
+        allItemFood.add(new ItemFood("Hamburger"));
+        allItemFood.add(new ItemFood("Pizza"));
+        allItemFood.add(new ItemFood("Pasta"));
 
-        MainAdapter mAdapter = new MainAdapter(allItems);
+        MainAdapter mAdapter = new MainAdapter(allItemFood);
         RecyclerView recyclerView = findViewById(R.id.main_view_rv);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
@@ -43,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
 
