@@ -1,4 +1,4 @@
-package com.purduediet.helloworld.purduedietdining;
+package com.purduediet.helloworld.purduedietdining.userInterface;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -11,7 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import com.purduediet.helloworld.purduedietdining.R;
 
 public class CalendarActivity extends AppCompatActivity {
 
