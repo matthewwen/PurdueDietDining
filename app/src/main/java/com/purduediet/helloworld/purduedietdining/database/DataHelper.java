@@ -7,8 +7,12 @@ import com.purduediet.helloworld.purduedietdining.database.DataContract.Food;
 
 public class DataHelper extends SQLiteOpenHelper {
 
-    public DataHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public static final String TAG = DataHelper.class.getSimpleName();
+
+    private static final int VERSION = 1;
+
+    public DataHelper(Context context) {
+        super(context, TAG, null, VERSION);
     }
 
     @Override
@@ -18,9 +22,7 @@ public class DataHelper extends SQLiteOpenHelper {
                 Food._ID + " INTEGER PRIMARY KEY, " +
                 Food.COLUMN_TIME_ADDED + " LONG NOT NULL, " +
                 Food.COLUMN_FOOD_NAME + " TEXT NOT NULL, " +
-                Food.COLUMN_DINING_COURT + "TEXT NOT NULL," +
                 Food.COLUMN_LOCATION + "TEXT NOT NULL," +
-                Food.COLUMN_MEAL_TYPE + "TEXT NOT NULL,"+
                 Food.COLUMN_CALORIES + "INTEGERS NOT NULL,"+
                 Food.COLUMN_PROTEIN + "INTEGERS NOT NULL);";
         db.execSQL(USER_CREATE_TABLE);
