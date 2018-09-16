@@ -23,23 +23,16 @@
             android:name=".userInterface.ItemFoodActivity"
             android:label="@string/title_activity_item_food"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".userInterface.DiningCourtActivity"
             android:label="@string/title_activity_dining_court"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <provider
-            android:name=".database.DataProvider"
-            android:authorities="com.purduediet.helloworld.purduedietdining.database.DataProvider" />
+            android:authorities="com.purduediet.helloworld.purduedietdining.database.DataProvider"
+            android:name=".database.DataProvider"/>
 
-        <activity
-            android:name=".userInterface.CalendarActivity"
-            android:label="@string/title_activity_calendar"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".CalendarActivity"
-            android:label="@string/title_activity_calendar"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
