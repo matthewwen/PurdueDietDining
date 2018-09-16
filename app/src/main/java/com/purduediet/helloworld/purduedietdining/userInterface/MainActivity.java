@@ -103,24 +103,24 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
             }
         };
         mAsyncTask.execute();
-//        if (!PreferenceUtils.isUpdatedToday(this)) {
-//            mAsyncTask.execute();
-//        }else {
-//            Thread thread = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    allItemFood = DataMethod.getTodayMenuDatabase(MainActivity.this);
-//                    mAdapter.setAllItems(allItemFood);
-//                    RecyclerSectionItemDecoration sectionItemDecoration =
-//                            new RecyclerSectionItemDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
-//                                    true,
-//                                    getSectionCallBack(allItemFood));
-//                    recyclerView.addItemDecoration(sectionItemDecoration);
-//                }
-//            });
-//            thread.run();
-//
-//        }
+        if (!PreferenceUtils.isUpdatedToday(this)) {
+            mAsyncTask.execute();
+        }else {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    allItemFood = DataMethod.getTodayMenuDatabase(MainActivity.this);
+                    mAdapter.setAllItems(allItemFood);
+                    RecyclerSectionItemDecoration sectionItemDecoration =
+                            new RecyclerSectionItemDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
+                                    true,
+                                    getSectionCallBack(allItemFood));
+                    recyclerView.addItemDecoration(sectionItemDecoration);
+                }
+            });
+            thread.run();
+
+        }
 
     }
 

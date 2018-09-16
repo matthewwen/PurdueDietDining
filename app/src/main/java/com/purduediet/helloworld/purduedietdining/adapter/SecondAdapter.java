@@ -25,7 +25,7 @@ public class SecondAdapter extends RecyclerView.Adapter<SecondAdapter.DataViewMo
     @NonNull
     @Override
     public SecondAdapter.DataViewModel onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.main_item_recycle_view, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_meals_item_recycle_view, viewGroup, false);
         return new SecondAdapter.DataViewModel(view);
     }
 
@@ -35,8 +35,8 @@ public class SecondAdapter extends RecyclerView.Adapter<SecondAdapter.DataViewMo
         ItemFood food;
         food = allItems.get(i);
         viewModel.mNameTv.setText(food.getName());
-        viewModel.mDescpritionTv.setText("Dining Court: " + FoodData.DINING_COURT[food.getDiningId()] + "| BLD: " + FoodData.BLD[food.getBreakLunchDinner()] + "| Station: " + food.getStation());
-        viewModel.mCaloriesTv.setText(Integer.toString(food.getCalories()));
+        viewModel.mDescpritionTv.setText(FoodData.BLD[food.getBreakLunchDinner()] + "Dining Court: " + FoodData.DINING_COURT[food.getDiningId()]);
+        viewModel.mCaloriesTv.setText("");
     }
 
     @Override
@@ -57,8 +57,8 @@ public class SecondAdapter extends RecyclerView.Adapter<SecondAdapter.DataViewMo
 
         public DataViewModel(@NonNull View itemView) {
             super(itemView);
-            mNameTv = itemView.findViewById(R.id.name_food_tv);
-            mDescpritionTv = itemView.findViewById(R.id.station_food_tv);
+            mNameTv = itemView.findViewById(R.id.data_name_food_tv);
+            mDescpritionTv = itemView.findViewById(R.id.data_location_food_tv);
             mCaloriesTv = itemView.findViewById(R.id.calories_food_tv);
         }
     }
