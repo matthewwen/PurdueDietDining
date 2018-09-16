@@ -4,7 +4,9 @@ public class ItemFood {
 
     int id;
     private int breakLunchDinner;
+    long dateEntered;
     int diningId;
+    int protein;
     private String name;
     private String station;
     private int calories;
@@ -34,6 +36,11 @@ public class ItemFood {
         }
     }
 
+    public ItemFood(int id, long dateEntered, int diningId, String name, int calories, int protein){
+        this.id = id; this.dateEntered = dateEntered; this.diningId = diningId; this.name = name;
+        this.calories = calories; this.protein = protein;
+    }
+
     public ItemFood(int id, int diningId, int breakLunchDinner, String name, String station,
                     boolean eggs, boolean fish, boolean gluten,
                     boolean milk, boolean peanuts, boolean shellfish,
@@ -44,6 +51,11 @@ public class ItemFood {
         this.eggs = eggs; this.fish = fish; this.gluten = gluten; this.milk = milk;
         this.peanuts = peanuts; this.eggs = peanuts; this.shellfish = shellfish; this.soy = soy;
         this.treeNuts = treeNuts; this.vegetarian = vegetarian; this.vegan = vegan; this.wheat = wheat;
+        protein = 0;
+    }
+
+    public int getProtein() {
+        return protein;
     }
 
     public int getDiningId(){

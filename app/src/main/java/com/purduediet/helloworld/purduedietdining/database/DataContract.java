@@ -5,18 +5,23 @@ import android.provider.BaseColumns;
 
 public class DataContract {
 
-    private static final String BASE_CONTENT_URI = "com.purduediet.helloworld.purduedietdining";
-    private static final Uri CONTENT_URI = Uri.parse(BASE_CONTENT_URI);
+    public static final String AUTHORITY = "com.purduediet.helloworld.purduedietdining";
+    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
-    class Food implements BaseColumns{
+    //name of the table
+    public static final String PATH_DATA = "userData";
+
+    public static class Food implements BaseColumns{
+
         public static final String TABLE_NAME = "listFood";
+
+        //content uri with the appended path
+        public static final Uri EVENT_CONTENT_URI = CONTENT_URI.buildUpon().appendPath(PATH_DATA).appendPath(TABLE_NAME).build();
 
         //column name
         public static final String COLUMN_TIME_ADDED = "timeEat";
         public static final String COLUMN_FOOD_NAME = "foodNameEat";
-        public static final String COLUMN_DINING_COURT ="diningCourtEat";
         public static final String COLUMN_LOCATION ="locationEAT";
-        public static final String COLUMN_MEAL_TYPE = "mealTypeEat";
         public static final String COLUMN_CALORIES ="caloriesEat";
         public static final String COLUMN_PROTEIN ="proteinEat";
 
@@ -26,9 +31,7 @@ public class DataContract {
                 Food._ID,
                 COLUMN_TIME_ADDED,
                 COLUMN_FOOD_NAME,
-                COLUMN_DINING_COURT,
                 COLUMN_LOCATION,
-                COLUMN_MEAL_TYPE,
                 COLUMN_CALORIES,
                 COLUMN_PROTEIN
         };
@@ -37,11 +40,9 @@ public class DataContract {
         public static final int COLUMN_ID_ARRAY_INDEX = 0;
         public static final int COLUMN_TIME_ADDED_ARRAY_INDEX = 1;
         public static final int COLUMN_FOOD_NAME_ARRAY_INDEX = 2;
-        public static final int COLUMN_DINING_COURT_ARRAY_INDEX = 3;
-        public static final int COLUMN_LOCATION_ARRAY_INDEX = 4;
-        public static final int COLUMN_MEAL_TYPE_ARRAY_INDEX = 5;
-        public static final int COLUMN_CALORIES_ARRAY_INDEX = 6;
-        public static final int COLUMN_PROTEINS_ARRAY_INDEX = 7;
+        public static final int COLUMN_LOCATION_ARRAY_INDEX = 3;
+        public static final int COLUMN_CALORIES_ARRAY_INDEX = 4;
+        public static final int COLUMN_PROTEINS_ARRAY_INDEX = 5;
 
 
 

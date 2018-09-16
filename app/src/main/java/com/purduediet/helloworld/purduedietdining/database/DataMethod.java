@@ -1,5 +1,14 @@
 package com.purduediet.helloworld.purduedietdining.database;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
+import android.net.Uri;
+
+import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
+import com.purduediet.helloworld.purduedietdining.database.DataContract.Food;
+
+
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
@@ -27,6 +36,17 @@ public class DataMethod {
         long highRange = currentTime - currentTime % DAY_TO_MIL_SEC;
         highRange += LONDON_TO_PURDUE + DAY_TO_MIL_SEC - 1;
         return highRange;
+    }
+
+    public static void addItem(Context context, ItemFood itemFood){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Food.COLUMN_TIME_ADDED, getCurrentTime());
+        contentValues.put(Food.COLUMN_FOOD_NAME, itemFood.getName());
+        contentValues.put(Food.COLUMN_LOCATION, itemFood.getDiningId());
+        contentValues.put(Food.COLUMN_CALORIES, itemFood.getCalories());
+        contentValues.put(Food.COLUMN_PROTEIN, itemFood.getProtein());
+        Uri uri = Food.EVENT_CONTENT_URI; 
+        context.getContentResolver().update(uri, contentValues, null, null);
     }
 
 
