@@ -10,9 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.purduediet.helloworld.purduedietdining.R;
+import com.purduediet.helloworld.purduedietdining.data.FoodData;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -37,13 +36,18 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
         ItemFood food;
         food = allItems.get(i);
         viewModel.mNameTv.setText(food.getName());
-        viewModel.mDescpritionTv.setText(food.getDescription());
+        viewModel.mDescpritionTv.setText("Dining Court: " + FoodData.DINING_COURT[food.getDiningId()] + "| BLD: " + FoodData.BLD[food.getBreakLunchDinner()] + "| Station: " + food.getStation());
         viewModel.mCaloriesTv.setText(Integer.toString(food.getCalories()));
     }
 
     @Override
     public int getItemCount() {
         return allItems.size();
+    }
+
+    public void setAllItems(ArrayList<ItemFood> allItems){
+        this.allItems = allItems;
+        notifyDataSetChanged();
     }
 
     class ViewModel extends RecyclerView.ViewHolder{
