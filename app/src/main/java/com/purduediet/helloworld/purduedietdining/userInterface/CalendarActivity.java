@@ -10,9 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.LinearLayout;
 
 import com.purduediet.helloworld.purduedietdining.R;
+
+import java.util.Calendar;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -69,6 +72,9 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
         appBarLayout.setExpanded(false);
+
+        //Getting the Calendar from the action bar
+        CalendarView calendarView = findViewById(R.id.calendar_cv);
 
     }
 
