@@ -68,6 +68,7 @@ public class CalendarActivity extends AppCompatActivity {
                 }
             }
         });
+        appBarLayout.setExpanded(false);
 
     }
 
