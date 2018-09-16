@@ -43,8 +43,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
         ItemFood food;
         food = allItems.get(i);
         viewModel.mNameTv.setText(food.getName());
-        viewModel.mDescpritionTv.setText("BLD: " + FoodData.BLD[food.getBreakLunchDinner()] + "| Station: " + food.getStation());
-        viewModel.mCaloriesTv.setText(Integer.toString(food.getCalories()));
+        viewModel.mDescpritionTv.setText(FoodData.BLD[food.getBreakLunchDinner()] + "| Station: " + food.getStation());
+        viewModel.mCaloriesTv.setText("");
         if (showTextBox){
             viewModel.mCheckBox.setVisibility(View.VISIBLE);
             viewModel.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -62,4 +62,5 @@ public class SecondAdapter extends RecyclerView.Adapter<SecondAdapter.DataViewMo
             mCaloriesTv = itemView.findViewById(R.id.calories_food_tv);
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package com.purduediet.helloworld.purduedietdining.userInterface;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,7 +20,10 @@ import android.widget.CalendarView;
 import android.widget.LinearLayout;
 
 import com.purduediet.helloworld.purduedietdining.R;
+import com.purduediet.helloworld.purduedietdining.adapter.SecondAdapter;
+import com.purduediet.helloworld.purduedietdining.database.DataContract;
 import com.purduediet.helloworld.purduedietdining.database.DataMethod;
+import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,6 +37,9 @@ public class CalendarActivity extends AppCompatActivity {
     private static final String TIME_USER_SELECTED_TAG = "time-user-selected-tag";
 
     long currentTime;
+
+    RecyclerView mRecycleView;
+    SecondAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,12 @@ public class CalendarActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        mRecycleView = findViewById(R.id.calendar_rv_duh);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(this);
+        mAdapter = new SecondAdapter(new ArrayList<ItemFood>());
+        mRecycleView.setLayoutManager(linearLayout);
+        mRecycleView.setAdapter(mAdapter);
 
         //setting up the collapsing tool bar
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.calendar_toolbar_layout);
@@ -103,9 +118,31 @@ public class CalendarActivity extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month, date);
                 currentTime = calendar.getTimeInMillis();
+                updateView(calendar.getTimeInMillis());
             }
         });
 
+
+    }
+
+    private void updateView(long time){
+        long getLowRange = DataMethod.getTimeLow(time);
+        long getHighRange = DataMethod.getTimeHigh(time);
+        ArrayList<ItemFood> allItems = new ArrayList<>();
+        Cursor cursor = getContentResolver().query(DataContract.Food.EVENT_CONTENT_URI, DataContract.TodayFood.PROJECTION_ARRAY,
+                DataContract.Food.COLUMN_TIME_ADDED + " =>? " , new String[]{
+                Long.toString(getLowRange)}, null);
+        cursor.moveToPosition(-1);
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(DataContract.Food.COLUMN_ID_ARRAY_INDEX);
+            long timeAdded = cursor.getLong(DataContract.Food.COLUMN_TIME_ADDED_ARRAY_INDEX);
+            String name = cursor.getString(DataContract.Food.COLUMN_FOOD_NAME_ARRAY_INDEX);
+            int diningID = cursor.getInt(DataContract.Food.COLUMN_LOCATION_ARRAY_INDEX);
+            ItemFood temp = new ItemFood(id, timeAdded, diningID, name, 0, 0);
+            allItems.add(temp);
+        }
+        cursor.close();
+        mRecycleView.setAdapter(mAdapter);
 
     }
 
