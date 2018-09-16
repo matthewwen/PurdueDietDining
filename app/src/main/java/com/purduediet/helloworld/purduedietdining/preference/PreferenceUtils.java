@@ -1,5 +1,7 @@
 package com.purduediet.helloworld.purduedietdining.preference;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import android.content.ContentProvider;
@@ -7,15 +9,21 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.purduediet.helloworld.purduedietdining.database.DataMethod;
+import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
+
 public class PreferenceUtils {
 
     private static final String TAG = PreferenceUtils.class.getSimpleName();
+
+    public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
 
     //Tags for preferences
     private static final String CALORIES_TAG_LIMIT = "calories-tag-limit";
     private static final String IS_VEGAN_TAG = "is-vegan-tag";
     private static final String IS_GLUTEN_FREE_TAG = "is-gluten-free-tag";
     private static final String PROTEINS_TAG_LIMIT = "proteins-tag-limit";
+    private static final String LAST_DATE_ADD_DATABASE = "last-date-add-database";
 
     //Default Values
     private static final int DEFAULT_CALORIES_COUNT = 1000;
@@ -60,6 +68,21 @@ public class PreferenceUtils {
     public static int getProteinsLimit(Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getInt(PROTEINS_TAG_LIMIT, DEFAULT_CALORIES_COUNT);
+    }
+
+    public static void setLastUpdateToday(Context context, int num){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(LAST_DATE_ADD_DATABASE, num);
+        editor.apply();
+    }
+
+    public static boolean isUpdatedToday(Context context){
+        long currentTime = DataMethod.getCurrentTime();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        int updateTime = preferences.getInt(LAST_DATE_ADD_DATABASE, 33);
+        int currentInt = Integer.parseInt(simpleDateFormat.format(currentTime));
+        return currentInt == updateTime;
     }
 
 }

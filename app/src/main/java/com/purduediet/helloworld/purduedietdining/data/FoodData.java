@@ -46,7 +46,7 @@ public class FoodData {
     public static ArrayList<ItemFood> getAllData() {
         ArrayList<ItemFood> allFood = new ArrayList<>();
         for (int i = 0; i < DINING_COURT.length; i++){
-            String usedURL = UGSG_REQUEST_URL + "/" + DINING_COURT[i] + "/" + simpleDateFormat.format(DataMethod.getCurrentTime() - TimeUnit.DAYS.toMillis(1));
+            String usedURL = UGSG_REQUEST_URL + "/" + DINING_COURT[i] + "/" + simpleDateFormat.format(DataMethod.getCurrentTime());
             allFood.addAll(fetchFoodItemData(i, usedURL));
         }
         return allFood;

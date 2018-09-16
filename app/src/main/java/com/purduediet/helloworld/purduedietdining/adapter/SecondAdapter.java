@@ -1,4 +1,4 @@
-package com.purduediet.helloworld.purduedietdining;
+package com.purduediet.helloworld.purduedietdining.adapter;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.purduediet.helloworld.purduedietdining.R;
 import com.purduediet.helloworld.purduedietdining.data.FoodData;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
 

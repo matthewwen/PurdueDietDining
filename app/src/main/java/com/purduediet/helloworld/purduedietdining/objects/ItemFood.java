@@ -125,4 +125,8 @@ public class ItemFood {
     public boolean isWheat() {
         return wheat;
     }
+
+    public boolean isHeader(){
+        return false;
+    }
 }

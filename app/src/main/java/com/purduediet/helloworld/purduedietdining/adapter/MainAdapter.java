@@ -2,11 +2,14 @@ package com.purduediet.helloworld.purduedietdining.adapter;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.purduediet.helloworld.purduedietdining.R;
@@ -18,9 +21,13 @@ import java.util.ArrayList;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
 
     private ArrayList<ItemFood> allItems;
+    boolean showTextBox;
+    MainActivityRecycleActivity context;
 
-    public MainAdapter(ArrayList<ItemFood> allItems){
+    public MainAdapter(MainActivityRecycleActivity context, ArrayList<ItemFood> allItems){
+        showTextBox = false;
         this.allItems = allItems;
+        this.context = context;
     }
 
     @NonNull
@@ -32,12 +39,38 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ViewModel viewModel, int i) {
+    public void onBindViewHolder(@NonNull ViewModel viewModel, final int i) {
         ItemFood food;
         food = allItems.get(i);
         viewModel.mNameTv.setText(food.getName());
-        viewModel.mDescpritionTv.setText("Dining Court: " + FoodData.DINING_COURT[food.getDiningId()] + "| BLD: " + FoodData.BLD[food.getBreakLunchDinner()] + "| Station: " + food.getStation());
+        viewModel.mDescpritionTv.setText("BLD: " + FoodData.BLD[food.getBreakLunchDinner()] + "| Station: " + food.getStation());
         viewModel.mCaloriesTv.setText(Integer.toString(food.getCalories()));
+        if (showTextBox){
+            viewModel.mCheckBox.setVisibility(View.VISIBLE);
+            viewModel.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b){
+                        context.onSelected(i);
+                    }else {
+                        context.onDeSelected(i);
+                    }
+                }
+            });
+            viewModel.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                }
+            });
+        }else {
+            viewModel.mCheckBox.setVisibility(View.GONE);
+            viewModel.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.onClick(i);
+                }
+            });
+        }
     }
 
     @Override
@@ -55,12 +88,31 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
         TextView mNameTv;
         TextView mDescpritionTv;
         TextView mCaloriesTv;
+        CheckBox mCheckBox;
+        View itemView;
 
         public ViewModel(@NonNull View itemView) {
             super(itemView);
             mNameTv = itemView.findViewById(R.id.name_food_tv);
             mDescpritionTv = itemView.findViewById(R.id.station_food_tv);
             mCaloriesTv = itemView.findViewById(R.id.calories_food_tv);
+            mCheckBox = itemView.findViewById(R.id.main_view_cb);
+            this.itemView = itemView;
         }
+    }
+
+    public void setCheckBoxVisible(boolean val){
+        showTextBox = val;
+        notifyDataSetChanged();
+    }
+
+    public boolean getCheckBoxVisible(){
+        return showTextBox;
+    }
+
+    public interface MainActivityRecycleActivity{
+        public void onClick(int id);
+        public void onSelected(int id);
+        public void onDeSelected(int id);
     }
 }
