@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.purduediet.helloworld.purduedietdining.userInterface.CalendarActivity;
 import com.purduediet.helloworld.purduedietdining.R;
 import com.purduediet.helloworld.purduedietdining.adapter.MainAdapter;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
