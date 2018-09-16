@@ -1,6 +1,8 @@
 package com.purduediet.helloworld.purduedietdining.userInterface;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -8,13 +10,27 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.LinearLayout;
 
 import com.purduediet.helloworld.purduedietdining.R;
+import com.purduediet.helloworld.purduedietdining.database.DataMethod;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity {
+
+    private static final String TAG = CalendarActivity.class.getSimpleName();
+
+    //Tag for variables in bundle
+    private static final String TIME_USER_SELECTED_TAG = "time-user-selected-tag";
+
+    long currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +39,15 @@ public class CalendarActivity extends AppCompatActivity {
         final Toolbar toolbar = findViewById(R.id.calendar_toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.calendar_fab);
+        if (savedInstanceState == null){
+            savedInstanceState = new Bundle();
+            currentTime = DataMethod.getCurrentTime();
+            savedInstanceState.putLong(TIME_USER_SELECTED_TAG, currentTime);
+        }else {
+            currentTime = savedInstanceState.getLong(TIME_USER_SELECTED_TAG);
+        }
+
+        FloatingActionButton fab = findViewById(R.id.calendar_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,7 +58,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         //setting up the collapsing tool bar
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.calendar_toolbar_layout);
-        AppBarLayout appBarLayout = findViewById(R.id.calendar_app_bar);
+        final AppBarLayout appBarLayout = findViewById(R.id.calendar_app_bar);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isShow = true;
             int scrollRange = -1;
@@ -70,6 +94,31 @@ public class CalendarActivity extends AppCompatActivity {
         });
         appBarLayout.setExpanded(false);
 
+        //Getting the Calendar from the action bar
+        CalendarView calendarView = findViewById(R.id.calendar_cv);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int date) {
+                appBarLayout.setExpanded(false);
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month, date);
+                currentTime = calendar.getTimeInMillis();
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putLong(TIME_USER_SELECTED_TAG, currentTime);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        currentTime = savedInstanceState.getLong(TIME_USER_SELECTED_TAG);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
