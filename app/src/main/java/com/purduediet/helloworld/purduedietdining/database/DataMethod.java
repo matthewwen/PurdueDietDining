@@ -81,6 +81,9 @@ public class DataMethod {
         contentValues.put(TodayFood.COLUMN_FOOD_VEGETARIAN, getBoolToIntVal(itemFood.isVegetarian()));
         contentValues.put(TodayFood.COLUMN_FOOD_VEGAN, getBoolToIntVal(itemFood.isVegan()));
         contentValues.put(TodayFood.COLUMN_FOOD_WHEAT, getBoolToIntVal(itemFood.isWheat()));
+
+        Uri uri = TodayFood.EVENT_CONTENT_URI;
+        Uri netUri = context.getContentResolver().insert(uri, contentValues);
     }
 
     public static void addDatabaseListToDatabase(Context context, ArrayList<ItemFood> allFood){
