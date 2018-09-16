@@ -13,6 +13,8 @@
         android:orientation="vertical"
         android:padding="8dp">
 
+
+
         <TextView
             android:id="@+id/name_food_tv"
             android:layout_width="wrap_content"
@@ -28,10 +30,6 @@
             android:layout_height="wrap_content"
             android:textSize="16dp"/>
 
-        <View
-            android:layout_width="100dp"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
 
     </LinearLayout>
 
