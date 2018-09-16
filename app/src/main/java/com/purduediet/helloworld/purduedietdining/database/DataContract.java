@@ -11,8 +11,12 @@ public class DataContract {
     //name of the table
     public static final String PATH_DATA = "userData";
 
-    public class Food implements BaseColumns{
+    public static class Food implements BaseColumns{
+
         public static final String TABLE_NAME = "listFood";
+
+        //content uri with the appended path
+        public static final Uri EVENT_CONTENT_URI = CONTENT_URI.buildUpon().appendPath(PATH_DATA).appendPath(TABLE_NAME).build();
 
         //column name
         public static final String COLUMN_TIME_ADDED = "timeEat";

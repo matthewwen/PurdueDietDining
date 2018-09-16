@@ -1,5 +1,4 @@
-package com.purduediet.helloworld.purduedietdining.adapter;
-
+package com.purduediet.helloworld.purduedietdining;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
@@ -9,30 +8,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.purduediet.helloworld.purduedietdining.R;
 import com.purduediet.helloworld.purduedietdining.data.FoodData;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
 
 import java.util.ArrayList;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
+public class SecondAdapter extends RecyclerView.Adapter<SecondAdapter.DataViewModel> {
 
     private ArrayList<ItemFood> allItems;
 
-    public MainAdapter(ArrayList<ItemFood> allItems){
+    public SecondAdapter(ArrayList<ItemFood> allItems){
         this.allItems = allItems;
     }
 
     @NonNull
     @Override
-    public ViewModel onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SecondAdapter.DataViewModel onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.main_item_recycle_view, viewGroup, false);
-        return new ViewModel(view);
+        return new SecondAdapter.DataViewModel(view);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ViewModel viewModel, int i) {
+    public void onBindViewHolder(@NonNull SecondAdapter.DataViewModel viewModel, int i) {
         ItemFood food;
         food = allItems.get(i);
         viewModel.mNameTv.setText(food.getName());
@@ -50,13 +48,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
         notifyDataSetChanged();
     }
 
-    class ViewModel extends RecyclerView.ViewHolder{
+    class DataViewModel extends RecyclerView.ViewHolder{
 
         TextView mNameTv;
         TextView mDescpritionTv;
         TextView mCaloriesTv;
 
-        public ViewModel(@NonNull View itemView) {
+        public DataViewModel(@NonNull View itemView) {
             super(itemView);
             mNameTv = itemView.findViewById(R.id.name_food_tv);
             mDescpritionTv = itemView.findViewById(R.id.station_food_tv);

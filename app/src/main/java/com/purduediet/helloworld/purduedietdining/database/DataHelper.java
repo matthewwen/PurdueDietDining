@@ -22,9 +22,9 @@ public class DataHelper extends SQLiteOpenHelper {
                 Food._ID + " INTEGER PRIMARY KEY, " +
                 Food.COLUMN_TIME_ADDED + " LONG NOT NULL, " +
                 Food.COLUMN_FOOD_NAME + " TEXT NOT NULL, " +
-                Food.COLUMN_LOCATION + "TEXT NOT NULL," +
-                Food.COLUMN_CALORIES + "INTEGERS NOT NULL,"+
-                Food.COLUMN_PROTEIN + "INTEGERS NOT NULL);";
+                Food.COLUMN_LOCATION + "INTEGER NOT NULL," +
+                Food.COLUMN_CALORIES + "INTEGER NOT NULL,"+
+                Food.COLUMN_PROTEIN + "INTEGER NOT NULL);";
         db.execSQL(USER_CREATE_TABLE);
 
     }
