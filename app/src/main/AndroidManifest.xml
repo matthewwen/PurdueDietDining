@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <provider
-            android:authorities="com.purduediet.helloworld.purduedietdining.database.DataProvider"
+            android:authorities="com.purduediet.helloworld.purduedietdining"
             android:name=".database.DataProvider"/>
 
     </application>
