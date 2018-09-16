@@ -1,6 +1,7 @@
 package com.purduediet.helloworld.purduedietdining.userInterface;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -22,7 +23,9 @@ import android.widget.LinearLayout;
 import com.purduediet.helloworld.purduedietdining.R;
 import com.purduediet.helloworld.purduedietdining.adapter.SecondAdapter;
 import com.purduediet.helloworld.purduedietdining.database.DataContract;
+import com.purduediet.helloworld.purduedietdining.database.DataHelper;
 import com.purduediet.helloworld.purduedietdining.database.DataMethod;
+import com.purduediet.helloworld.purduedietdining.database.DataProvider;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
 
 import java.util.ArrayList;
@@ -129,9 +132,8 @@ public class CalendarActivity extends AppCompatActivity {
         long getLowRange = DataMethod.getTimeLow(time);
         long getHighRange = DataMethod.getTimeHigh(time);
         ArrayList<ItemFood> allItems = new ArrayList<>();
-        Cursor cursor = getContentResolver().query(DataContract.Food.EVENT_CONTENT_URI, DataContract.TodayFood.PROJECTION_ARRAY,
-                DataContract.Food.COLUMN_TIME_ADDED + " =>? " , new String[]{
-                Long.toString(getLowRange)}, null);
+        SQLiteDatabase sqLiteDatabase = new DataHelper(this).getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + DataContract.Food.TABLE_NAME + "WHERE " + DataContract.Food.COLUMN_TIME_ADDED + " BETWEEN " + (getLowRange) + " AND " + getHighRange, null );;
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()){
             int id = cursor.getInt(DataContract.Food.COLUMN_ID_ARRAY_INDEX);
@@ -142,7 +144,7 @@ public class CalendarActivity extends AppCompatActivity {
             allItems.add(temp);
         }
         cursor.close();
-        mRecycleView.setAdapter(mAdapter);
+        mAdapter.setAllItems(allItems);
 
     }
 
