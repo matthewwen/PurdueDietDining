@@ -17,23 +17,29 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".preference.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".userInterface.ItemFoodActivity"
             android:label="@string/title_activity_item_food"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".userInterface.DiningCourtActivity"
             android:label="@string/title_activity_dining_court"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".userInterface.CalendarActivity"
+        <activity
+            android:name=".userInterface.CalendarActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_calendar"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <provider
+            android:exported="false"
             android:authorities="com.purduediet.helloworld.purduedietdining"
             android:name=".database.DataProvider"/>
 
