@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.purduediet.helloworld.purduedietdining.R;
 
@@ -19,24 +20,33 @@ public class RecyclerSectionItemDecoration extends RecyclerView.ItemDecoration {
     private View headerView;
     private TextView header;
 
-    public RecyclerSectionItemDecoration(int headerHeight, boolean sticky, @NonNull SectionCallback sectionCallback) {
+    private OpenDiningActivity context;
+
+    public RecyclerSectionItemDecoration(OpenDiningActivity context,
+                                         int headerHeight, boolean sticky, @NonNull SectionCallback sectionCallback) {
         headerOffset = headerHeight;
         this.sticky = sticky;
         this.sectionCallback = sectionCallback;
+        this.context = context;
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(Rect outRect, View view, final RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
 
         int pos = parent.getChildAdapterPosition(view);
         if (sectionCallback.isSection(pos)) {
             outRect.top = headerOffset;
         }
+
+    }
+
+    public interface OpenDiningActivity{
+        public void openDiningActivity();
     }
 
     @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDrawOver(Canvas c, final RecyclerView parent, RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
 
         if (headerView == null) {

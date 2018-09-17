@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,14 +20,16 @@ import com.purduediet.helloworld.purduedietdining.adapter.RecyclerSectionItemDec
 import com.purduediet.helloworld.purduedietdining.data.FoodData;
 import com.purduediet.helloworld.purduedietdining.database.DataContract;
 import com.purduediet.helloworld.purduedietdining.database.DataMethod;
+import com.purduediet.helloworld.purduedietdining.objects.DiningCourt;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
 import com.purduediet.helloworld.purduedietdining.preference.PreferenceUtils;
+import com.purduediet.helloworld.purduedietdining.userInterface.DiningCourtActivity;
 import com.purduediet.helloworld.purduedietdining.userInterface.ItemFoodActivity;
 import com.purduediet.helloworld.purduedietdining.userInterface.MainActivity;
 
 import java.util.ArrayList;
 
-public class BreakfastFragment extends Fragment implements MainAdapter.MainActivityRecycleActivity{
+public class BreakfastFragment extends Fragment implements RecyclerSectionItemDecoration.OpenDiningActivity{
 
     RecyclerView recyclerView; //the breakfast recycle view
     ArrayList<ItemFood> allItemFood; //All Breakfast options
@@ -41,13 +46,13 @@ public class BreakfastFragment extends Fragment implements MainAdapter.MainActiv
         //Initializing global variables
         recyclerView = view.findViewById(R.id.breakfast_rv);
         allItemFood = DataMethod.getBreakfastTodayOptions(getContext());
-        mAdapter = new MainAdapter(this, allItemFood);
+        mAdapter = new MainAdapter(allItemFood);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
 
         RecyclerSectionItemDecoration sectionItemDecoration =
-                new RecyclerSectionItemDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
+                new RecyclerSectionItemDecoration(this, getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
                         true,
                         getSectionCallBack(allItemFood));
         recyclerView.addItemDecoration(sectionItemDecoration);
@@ -55,6 +60,15 @@ public class BreakfastFragment extends Fragment implements MainAdapter.MainActiv
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
     //The Headings
     private RecyclerSectionItemDecoration.SectionCallback getSectionCallBack(final ArrayList<ItemFood> allItemFood){
@@ -77,20 +91,11 @@ public class BreakfastFragment extends Fragment implements MainAdapter.MainActiv
         };
     }
 
+
     @Override
-    public void onClick(int id) {
-        Intent intent = new Intent(getContext(), ItemFoodActivity.class);
-        intent.putExtra(MainActivity.FOOD_ITEM_SELECTED_ID, id);
+    public void openDiningActivity() {
+        Intent intent = new Intent(getContext(), DiningCourtActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-    }
-
-    @Override
-    public void onSelected(int id) {
-        allItemsID.add(id);
-    }
-
-    @Override
-    public void onDeSelected(int id) {
-        allItemsID.remove(id);
     }
 }

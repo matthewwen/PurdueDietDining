@@ -2,25 +2,27 @@ package com.purduediet.helloworld.purduedietdining.objects;
 
 public class ItemFood {
 
-    int id;
-    private int breakLunchDinner;
-    long dateEntered;
-    int diningId;
-    int protein;
-    private String name;
-    private String station;
-    private int calories;
-    private boolean eggs;
-    private boolean fish;
-    private boolean gluten;
-    private boolean milk;
-    private boolean peanuts;
-    private boolean shellfish;
-    private boolean soy;
-    private boolean treeNuts;
-    private boolean vegetarian;
-    private boolean vegan;
-    private boolean wheat;
+    int id; //the id inside the database
+    private int breakLunchDinner; //served breakfast, lunch, or dinner
+    long dateEntered; //date entered
+    int diningId; //which dining court is it in
+    int protein; //amount of protein inside the food
+    private String name; //name of the food
+    private String station; //which station food is in
+    private int calories; //amount of calories
+    private boolean eggs; //allergies
+    private boolean fish; //allergies
+    private boolean gluten; //allergies
+    private boolean milk; //allergies
+    private boolean peanuts; //allergies
+    private boolean shellfish; //allergies
+    private boolean soy; //allergies
+    private boolean treeNuts; //allergies
+    private boolean vegetarian; //allergies
+    private boolean vegan; //allergies
+    private boolean wheat; //allergies
+
+    private boolean isSelected; //it is selected as an eaten meal
 
     public ItemFood(String name){
         this.name = name;
@@ -38,7 +40,7 @@ public class ItemFood {
 
     public ItemFood(int id, long dateEntered, int diningId, String name, int calories, int protein){
         this.id = id; this.dateEntered = dateEntered; this.diningId = diningId; this.name = name;
-        this.calories = calories; this.protein = protein;
+        this.calories = calories; this.protein = protein; isSelected = false;
     }
 
     public ItemFood(int id, int diningId, int breakLunchDinner, String name, String station,

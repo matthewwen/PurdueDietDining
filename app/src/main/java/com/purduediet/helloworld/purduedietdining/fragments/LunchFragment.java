@@ -22,7 +22,7 @@ import com.purduediet.helloworld.purduedietdining.userInterface.MainActivity;
 
 import java.util.ArrayList;
 
-public class LunchFragment extends Fragment implements MainAdapter.MainActivityRecycleActivity{
+public class LunchFragment extends Fragment implements MainAdapter.MainActivityRecycleActivity, RecyclerSectionItemDecoration.OpenDiningActivity{
 
     RecyclerView recyclerView; //the breakfast recycle view
     ArrayList<ItemFood> allItemFood; //All Breakfast options
@@ -44,7 +44,7 @@ public class LunchFragment extends Fragment implements MainAdapter.MainActivityR
         recyclerView.setAdapter(mAdapter);
 
         RecyclerSectionItemDecoration sectionItemDecoration =
-                new RecyclerSectionItemDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
+                new RecyclerSectionItemDecoration(this, getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
                         true,
                         getSectionCallBack(allItemFood));
         recyclerView.addItemDecoration(sectionItemDecoration);
@@ -88,5 +88,10 @@ public class LunchFragment extends Fragment implements MainAdapter.MainActivityR
     @Override
     public void onDeSelected(int id) {
         allItemsID.remove(id);
+    }
+
+    @Override
+    public void openDiningActivity() {
+
     }
 }

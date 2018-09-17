@@ -30,6 +30,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
         this.context = context;
     }
 
+    public MainAdapter(ArrayList<ItemFood> allItems){
+        showTextBox = false;
+        this.allItems = allItems;
+    }
+
     @NonNull
     @Override
     public ViewModel onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -45,32 +50,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
         viewModel.mNameTv.setText(food.getName());
         viewModel.mDescpritionTv.setText(FoodData.BLD[food.getBreakLunchDinner()] + "| Station: " + food.getStation());
         viewModel.mCaloriesTv.setText("");
-        if (showTextBox){
-            viewModel.mCheckBox.setVisibility(View.VISIBLE);
-            viewModel.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b){
-                        context.onSelected(i);
-                    }else {
-                        context.onDeSelected(i);
-                    }
-                }
-            });
-            viewModel.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                }
-            });
-        }else {
-            viewModel.mCheckBox.setVisibility(View.GONE);
-            viewModel.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    context.onClick(i);
-                }
-            });
-        }
+
     }
 
     @Override
