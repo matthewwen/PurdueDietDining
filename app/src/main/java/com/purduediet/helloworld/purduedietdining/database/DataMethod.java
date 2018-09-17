@@ -172,4 +172,12 @@ public class DataMethod {
         return getTodayOptions(context, 0);
     }
 
+    public static ArrayList<ItemFood> getLunchTodayOptions(Context context){
+        return getTodayOptions(context, 1);
+    }
+
+    public static ArrayList<ItemFood> getDinnerTodayOptions(Context context){
+        return getTodayOptions(context, 2);
+    }
+
 }
