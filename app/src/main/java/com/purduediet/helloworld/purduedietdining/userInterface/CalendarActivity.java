@@ -125,6 +125,8 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
+        //update the view
+        updateView(DataMethod.getCurrentTime());
 
     }
 
