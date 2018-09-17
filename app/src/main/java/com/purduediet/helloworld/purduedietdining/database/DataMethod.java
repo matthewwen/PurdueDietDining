@@ -52,18 +52,6 @@ public class DataMethod {
         context.getContentResolver().insert(uri, contentValues);
     }
 
-    private static int getBoolToIntVal(boolean value){
-        if (value){
-            return 1;
-        }
-        return 0;
-    }
-
-    private static boolean getIntToBoolVal(int val){
-        return val == 1;
-    }
-
-
     public static void addTodayDatabaseItem(Context context, ItemFood itemFood){
         ContentValues contentValues = new ContentValues();
         contentValues.put(TodayFood.COLUMN_BLD, itemFood.getBreakLunchDinner());
@@ -86,6 +74,18 @@ public class DataMethod {
         Uri netUri = context.getContentResolver().insert(uri, contentValues);
     }
 
+    private static int getBoolToIntVal(boolean value){
+        if (value){
+            return 1;
+        }
+        return 0;
+    }
+
+    private static boolean getIntToBoolVal(int val){
+        return val == 1;
+    }
+
+
     public static void addDatabaseListToDatabase(Context context, ArrayList<ItemFood> allFood){
         for (int i = 0; i < allFood.size(); i++){
             addUserDatabaseItem(context, allFood.get(i));
@@ -97,7 +97,6 @@ public class DataMethod {
             addTodayDatabaseItem(context, allFood.get(i));
         }
     }
-
 
     public static ArrayList<ItemFood> getTodayMenuDatabase(Context context){
         ArrayList<ItemFood> allItems = new ArrayList<>();

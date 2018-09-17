@@ -53,7 +53,7 @@ public class FoodData {
     }
 
     public static ArrayList<ItemFood> fetchFoodItemData(int diningCourt, String mUrl){
-        Log.v(TAG, "This is the URL: " + mUrl);
+        //Log.v(TAG, "This is the URL: " + mUrl);
         URL url = createURL(mUrl);
 
         String jsonData;
@@ -134,22 +134,32 @@ public class FoodData {
             JSONObject jsonObject = new JSONObject(jsonResponse);
             JSONArray jsonArrayMeals = jsonObject.getJSONArray("Meals");
             for (int a = 0 ; a < jsonArrayMeals.length(); a++) {
-                int bldType = ItemFood.getType(jsonArrayMeals.getJSONObject(a).getString("Name"));
-                JSONArray jsonStationArray = jsonArrayMeals.getJSONObject(a).getJSONArray("Stations");
 
+                //Getting if it's Breakfast, Lunch, Or Dinner.
+                JSONObject mealObject = jsonArrayMeals.getJSONObject(a);
+                int bldType = ItemFood.getType(mealObject.getString("Name"));
+                JSONArray jsonStationArray = mealObject.getJSONArray("Stations");
+
+                //Looking at each station
                 for (int i = 0; i < jsonStationArray.length(); i++) {
-                    String station = jsonStationArray.getJSONObject(i).getString("Name");
-                    JSONArray jsonFoodItemsArray = jsonStationArray.getJSONObject(i).getJSONArray("Items");
+                    JSONArray jsonFoodItemsArray = jsonStationArray.getJSONObject(i).getJSONArray("Items"); //getting items
+                    String station = jsonStationArray.getJSONObject(i).getString("Name"); //getting the name of the station
 
+                    //Getting the items at each station
                     for (int j = 0; j < jsonFoodItemsArray.length(); j++) {
-                        JSONObject temp = jsonFoodItemsArray.getJSONObject(j);
-                        String name = temp.getString("Name");
-                        Log.v(TAG, "Name: " + name);
-                        JSONArray jsonAllergiesArray = temp.getJSONArray("Allergens");
-                        boolean[] isOrIsnt = new boolean[11];
-
-                        for (int k = 0; k < 11; k++) {
-                            isOrIsnt[k] = jsonAllergiesArray.getJSONObject(k).getBoolean("Value");
+                        JSONObject temp = jsonFoodItemsArray.getJSONObject(j); //gets food item
+                        String name = temp.getString("Name"); //getting the name of the item
+                        boolean[] isOrIsnt = new boolean[]{false, false, false, false, false, false, false, false, false, false, false}; //declaring everything as false
+                        JSONArray jsonAllergiesArray;
+                        //check if the list exists
+                        if (temp.has("Allergens")){
+                            jsonAllergiesArray = temp.getJSONArray("Allergens"); //getting list of allergies
+                            //going through list of allergies
+                            for (int k = 0; k < jsonAllergiesArray.length(); k++) {
+                                isOrIsnt[k] = jsonAllergiesArray.getJSONObject(k).getBoolean("Value");
+                            }
+                        }else {
+                            isOrIsnt[8] = temp.getBoolean("IsVegetarian");
                         }
 
                         ItemFood tempItemFood = new ItemFood(a * i + j, diningId, bldType, name, station, isOrIsnt[0],

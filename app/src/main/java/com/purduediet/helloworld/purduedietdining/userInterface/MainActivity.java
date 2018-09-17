@@ -15,6 +15,7 @@ import com.purduediet.helloworld.purduedietdining.adapter.RecyclerSectionItemDec
 import com.purduediet.helloworld.purduedietdining.data.FoodData;
 import com.purduediet.helloworld.purduedietdining.R;
 import com.purduediet.helloworld.purduedietdining.adapter.MainAdapter;
+import com.purduediet.helloworld.purduedietdining.database.DataContract;
 import com.purduediet.helloworld.purduedietdining.database.DataMethod;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
 import com.purduediet.helloworld.purduedietdining.preference.PreferenceUtils;
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
             protected void onPostExecute(ArrayList<ItemFood> itemFoods) {
                 Log.v(TAG, "Item Food size: " + itemFoods.size());
                 allItemFood = itemFoods;
+                MainActivity.this.getContentResolver().delete(DataContract.TodayFood.EVENT_CONTENT_URI, null, null);
                 DataMethod.addTodayMenuToDatabase(MainActivity.this, itemFoods);
                 mAdapter.setAllItems(itemFoods);
                 RecyclerSectionItemDecoration sectionItemDecoration =
@@ -102,7 +104,8 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
                 return FoodData.getAllData();
             }
         };
-        mAsyncTask.execute();
+
+
         if (!PreferenceUtils.isUpdatedToday(this)) {
             mAsyncTask.execute();
         }else {

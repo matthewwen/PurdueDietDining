@@ -133,7 +133,7 @@ public class CalendarActivity extends AppCompatActivity {
         long getHighRange = DataMethod.getTimeHigh(time);
         ArrayList<ItemFood> allItems = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = new DataHelper(this).getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + DataContract.Food.TABLE_NAME + " WHERE " + DataContract.Food.COLUMN_TIME_ADDED + " BETWEEN " + (getLowRange) + " AND " + getHighRange, null );;
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + DataContract.Food.TABLE_NAME + " WHERE " + DataContract.Food.COLUMN_TIME_ADDED + " BETWEEN " + getLowRange + " AND " + getHighRange, null );
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()){
             int id = cursor.getInt(DataContract.Food.COLUMN_ID_ARRAY_INDEX);
