@@ -3,6 +3,10 @@ package com.purduediet.helloworld.purduedietdining.userInterface;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +21,7 @@ import com.purduediet.helloworld.purduedietdining.R;
 import com.purduediet.helloworld.purduedietdining.adapter.MainAdapter;
 import com.purduediet.helloworld.purduedietdining.database.DataContract;
 import com.purduediet.helloworld.purduedietdining.database.DataMethod;
+import com.purduediet.helloworld.purduedietdining.fragments.FragmentPageAdapter;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
 import com.purduediet.helloworld.purduedietdining.preference.PreferenceUtils;
 import com.purduediet.helloworld.purduedietdining.preference.SettingsActivity;
@@ -26,10 +31,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements MainAdapter.MainActivityRecycleActivity {
 
     private static final String TAG = MainAdapter.class.getSimpleName();
-
-    RecyclerView recyclerView;
-    ArrayList<ItemFood> allItemFood ;
-    MainAdapter mAdapter;
 
     ArrayList<Integer> allItemsID;
 
@@ -50,16 +51,7 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
                 break;
             }
             case R.id.action_add: {
-                if (mAdapter.getCheckBoxVisible()){
-                    mAdapter.setCheckBoxVisible(false);
-                    //add to database
-                    ArrayList<ItemFood> allFood = getAllSelectedItems(allItemFood, allItemsID);
-                    DataMethod.addDatabaseListToDatabase(this, allFood);
-                    allItemsID.clear();
-                }else {
-                    mAdapter.setCheckBoxVisible(true);
-                }
-                break;
+                //Do something
             }
         }
         return true;
@@ -70,14 +62,6 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.main_view_rv);
-        allItemFood = new ArrayList<>();
-
-        mAdapter = new MainAdapter(this, allItemFood);
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(mAdapter);
-
         allItemsID = new ArrayList<>();
 
         @SuppressLint("StaticFieldLeak")
@@ -86,17 +70,10 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
             @Override
             protected void onPostExecute(ArrayList<ItemFood> itemFoods) {
                 Log.v(TAG, "Item Food size: " + itemFoods.size());
-                allItemFood = itemFoods;
                 MainActivity.this.getContentResolver().delete(DataContract.TodayFood.EVENT_CONTENT_URI, null, null);
                 DataMethod.addTodayMenuToDatabase(MainActivity.this, itemFoods);
-                mAdapter.setAllItems(itemFoods);
-                RecyclerSectionItemDecoration sectionItemDecoration =
-                        new RecyclerSectionItemDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
-                                true,
-                                getSectionCallBack(allItemFood));
                 int updateInt = Integer.parseInt(PreferenceUtils.simpleDateFormat.format(DataMethod.getCurrentTime()));
                 PreferenceUtils.setLastUpdateToday(MainActivity.this, updateInt);
-                recyclerView.addItemDecoration(sectionItemDecoration);
             }
 
             @Override
@@ -104,26 +81,24 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
                 return FoodData.getAllData();
             }
         };
-
-
         if (!PreferenceUtils.isUpdatedToday(this)) {
             mAsyncTask.execute();
-        }else {
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    allItemFood = DataMethod.getTodayMenuDatabase(MainActivity.this);
-                    mAdapter.setAllItems(allItemFood);
-                    RecyclerSectionItemDecoration sectionItemDecoration =
-                            new RecyclerSectionItemDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
-                                    true,
-                                    getSectionCallBack(allItemFood));
-                    recyclerView.addItemDecoration(sectionItemDecoration);
-                }
-            });
-            thread.run();
-
         }
+
+        //Find the View Pager
+        ViewPager pager = findViewById(R.id.bre_lunc_dinn_vp);
+        FragmentPagerAdapter pagerAdapter = new FragmentPageAdapter(getSupportFragmentManager());
+        pager.setAdapter(pagerAdapter);
+
+        //The Tab Layout
+        TabLayout tabLayout = findViewById(R.id.bre_lunc_dinn_tb);
+        int[] color = {getResources().getColor(R.color.main_activity_tab_Indicator_color),
+                getResources().getColor(R.color.main_activity_tab_selected_text_color),
+                getResources().getColor(R.color.main_activity_tab_not_selected_text_color)};
+        tabLayout.setSelectedTabIndicatorColor(color[0]);
+        tabLayout.setTabTextColors(color[2], color[1]);
+
+        tabLayout.setupWithViewPager(pager);
 
     }
 
