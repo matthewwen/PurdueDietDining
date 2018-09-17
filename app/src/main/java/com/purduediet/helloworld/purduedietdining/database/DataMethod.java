@@ -85,7 +85,6 @@ public class DataMethod {
         return val == 1;
     }
 
-
     public static void addDatabaseListToDatabase(Context context, ArrayList<ItemFood> allFood){
         for (int i = 0; i < allFood.size(); i++){
             addUserDatabaseItem(context, allFood.get(i));
@@ -130,6 +129,47 @@ public class DataMethod {
         }
         cursor.close();
         return allItems;
+    }
+
+    //getting all the options based off of BLD(Breakfast, Lunch, or Dinner)
+    public static ArrayList<ItemFood> getTodayOptions(Context context, int bldVal){
+        ArrayList<ItemFood> allItems = new ArrayList<>();
+        String selection = TodayFood.COLUMN_BLD + "=?";
+        String[] selectionArgs = new String[]{Integer.toString(bldVal)};
+        Cursor cursor = context.getContentResolver().query(TodayFood.EVENT_CONTENT_URI, TodayFood.PROJECTION_ARRAY,
+                selection, selectionArgs, TodayFood.COLUMN_LOCATION);
+        assert cursor != null;
+        cursor.moveToPosition(-1);
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(TodayFood.COLUMN_ID_ARRAY_INDEX);
+            int bld = cursor.getInt(TodayFood.COLUMN_BLD_INDEX);
+            int location = cursor.getInt(TodayFood.COLUMN_LOCATION_INDEX);
+            String name = cursor.getString(TodayFood.COLUMN_FOOD_NAME_INDEX);
+            String station = cursor.getString(TodayFood.COLUMN_FOOD_STATION_INDEX);
+            int egg = cursor.getInt(TodayFood.COLUMN_FOOD_EGGS_INDEX);
+            int fish = cursor.getInt(TodayFood.COLUMN_FOOD_FISH_INDEX);
+            int fluten = cursor.getInt(TodayFood.COLUMN_FOOD_GLUTEN_INDEX);
+            int milk = cursor.getInt(TodayFood.COLUMN_FOOD_MILK_INDEX);
+            int peanuts = cursor.getInt(TodayFood.COLUMN_FOOD_PEANUTS_INDEX);
+            int shellFish = cursor.getInt(TodayFood.COLUMN_FOOD_SHELL_FISH_INDEX);
+            int soy = cursor.getInt(TodayFood.COLUMN_FOOD_SOY_INDEX);
+            int treeNuts = cursor.getInt(TodayFood.COLUMN_FOOD_TREE_NUTS_INDEX);
+            int vegetarian = cursor.getInt(TodayFood.COLUMN_FOOD_VEGETARIAN_INDEX);
+            int vegan = cursor.getInt(TodayFood.COLUMN_FOOD_VEGAN_INDEX);
+            int wheat = cursor.getInt(TodayFood.COLUMN_FOOD_WHEAT_INDEX);
+
+            ItemFood temp = new ItemFood(id, location, bld, name, station, getIntToBoolVal(egg)
+                    , getIntToBoolVal(fish) , getIntToBoolVal(fluten) , getIntToBoolVal(milk) , getIntToBoolVal(peanuts)
+                    , getIntToBoolVal(shellFish) , getIntToBoolVal(soy) , getIntToBoolVal(treeNuts) , getIntToBoolVal(vegetarian)
+                    , getIntToBoolVal(vegan) , getIntToBoolVal(wheat));
+            allItems.add(temp);
+        }
+        cursor.close();
+        return allItems;
+    }
+
+    public static ArrayList<ItemFood> getBreakfastTodayOptions(Context context){
+        return getTodayOptions(context, 0);
     }
 
 }

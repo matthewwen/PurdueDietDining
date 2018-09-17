@@ -49,11 +49,6 @@ public class DataProvider extends ContentProvider {
         return false;
     }
 
-    public Cursor rawQuery(long lowTime, long highTime){
-        SQLiteDatabase sqLiteDatabase = mDbHelper.getReadableDatabase();
-        return sqLiteDatabase.rawQuery("SELECT * FROM " + Food.TABLE_NAME + "WHERE " + Food.COLUMN_TIME_ADDED + " BETWEEN " + (lowTime) + " AND " + highTime, null );
-    }
-
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
