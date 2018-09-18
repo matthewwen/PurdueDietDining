@@ -92,7 +92,7 @@ public class DinnerFragment extends Fragment implements MainAdapter.MainActivity
     }
 
     @Override
-    public void openDiningActivity() {
+    public void showListOfDiningCourts() {
 
     }
 }

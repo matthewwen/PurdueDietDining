@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.purduediet.helloworld.purduedietdining.R;
 
@@ -39,10 +38,17 @@ public class RecyclerSectionItemDecoration extends RecyclerView.ItemDecoration {
             outRect.top = headerOffset;
         }
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.showListOfDiningCourts();
+            }
+        });
+
     }
 
     public interface OpenDiningActivity{
-        public void openDiningActivity();
+        public void showListOfDiningCourts();
     }
 
     @Override

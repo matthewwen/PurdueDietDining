@@ -53,6 +53,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewModel> {
 
     }
 
+    //clear all the elements into the arrap
+    public void clear(){
+        allItems.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return allItems.size();

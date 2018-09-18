@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.purduediet.helloworld.purduedietdining.R;
+import com.purduediet.helloworld.purduedietdining.adapter.HeadingAdapter;
 import com.purduediet.helloworld.purduedietdining.adapter.MainAdapter;
 import com.purduediet.helloworld.purduedietdining.adapter.RecyclerSectionItemDecoration;
 import com.purduediet.helloworld.purduedietdining.data.FoodData;
@@ -37,6 +38,9 @@ public class BreakfastFragment extends Fragment implements RecyclerSectionItemDe
 
     ArrayList<Integer> allItemsID;
 
+    //creating the headings
+    RecyclerSectionItemDecoration sectionItemDecoration;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +55,7 @@ public class BreakfastFragment extends Fragment implements RecyclerSectionItemDe
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
 
-        RecyclerSectionItemDecoration sectionItemDecoration =
+        sectionItemDecoration =
                 new RecyclerSectionItemDecoration(this, getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
                         true,
                         getSectionCallBack(allItemFood));
@@ -93,9 +97,10 @@ public class BreakfastFragment extends Fragment implements RecyclerSectionItemDe
 
 
     @Override
-    public void openDiningActivity() {
-        Intent intent = new Intent(getContext(), DiningCourtActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+    public void showListOfDiningCourts() {
+        mAdapter.clear();
+        recyclerView.removeItemDecoration(sectionItemDecoration);
+        HeadingAdapter adapter = new HeadingAdapter();
+        recyclerView.setAdapter(adapter);
     }
 }

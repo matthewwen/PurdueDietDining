@@ -91,7 +91,7 @@ public class LunchFragment extends Fragment implements MainAdapter.MainActivityR
     }
 
     @Override
-    public void openDiningActivity() {
+    public void showListOfDiningCourts() {
 
     }
 }
