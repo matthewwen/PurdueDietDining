@@ -25,8 +25,16 @@ public class PreferenceUtils {
     private static final String PROTEINS_TAG_LIMIT = "proteins-tag-limit";
     private static final String LAST_DATE_ADD_DATABASE = "last-date-add-database";
 
+    //TAGS for breakfast, lunch and dinner
+    private static final String BREAKFAST_DINING_CHOICE = "breakfast-dining-choice";
+    private static final String LUNCH_DINING_CHOICE = "lunch-dining-choice";
+    private static final String DINNER_DINING_CHOICE = "dinner-dining-choice";
+
     //Default Values
     private static final int DEFAULT_CALORIES_COUNT = 1000;
+
+    //Default Breakfast, Lunch, and Dinner View
+    private static final int DEFAULT_BLD_DINING_ID = -1;
 
     public static void setCaloriesLimit(Context context, int limit) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -83,6 +91,46 @@ public class PreferenceUtils {
         int updateTime = preferences.getInt(LAST_DATE_ADD_DATABASE, 33);
         int currentInt = Integer.parseInt(simpleDateFormat.format(currentTime));
         return currentInt == updateTime;
+    }
+
+    //setting breakfast dining choice
+    public static void setBreakfastDiningChoice(Context context, int id){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(BREAKFAST_DINING_CHOICE, id);
+        editor.apply();
+    }
+
+    //setting lunch dining choice
+    public static void setLunchDiningChoice(Context context, int id){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(LUNCH_DINING_CHOICE, id);
+        editor.apply();
+    }
+
+    //setting dinner dining choice
+    public static void setDinnerDiningChoice(Context context, int id){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(DINNER_DINING_CHOICE, id);
+        editor.apply();
+    }
+
+    //getting breakfast dining choice
+    public static int getBreakfastDiningChoice(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getInt(BREAKFAST_DINING_CHOICE, DEFAULT_BLD_DINING_ID);
+    }
+
+    public static int getLunchDiningChoice(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getInt(LUNCH_DINING_CHOICE, DEFAULT_BLD_DINING_ID);
+    }
+
+    public static int getDinnerDiningChoice(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getInt(DINNER_DINING_CHOICE, DEFAULT_BLD_DINING_ID);
     }
 
 }
