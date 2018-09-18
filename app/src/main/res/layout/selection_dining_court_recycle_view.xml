@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/select_heading_tv"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:textStyle="bold"
         android:textSize="25sp"
         android:padding="8dp"
@@ -17,6 +19,13 @@
         android:background="@android:color/white"/>
 
     <!--Need to add Check Mark Button-->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="16dp"
+        android:src="@mipmap/ic_check_mark"/>
 
 
 </LinearLayout>
