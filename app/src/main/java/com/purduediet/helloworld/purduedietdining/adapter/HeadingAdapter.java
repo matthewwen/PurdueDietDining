@@ -11,6 +11,13 @@ import com.purduediet.helloworld.purduedietdining.R;
 
 public class HeadingAdapter extends RecyclerView.Adapter<HeadingAdapter.HeadingViewModel> {
 
+    HeadingSetPreference context;
+
+    //constructor method
+    public HeadingAdapter(HeadingSetPreference context){
+        this.context = context;
+    }
+
     private static final String[] selectDiningArray = new String[]{
             "View All",
             "Earhart",
@@ -28,8 +35,14 @@ public class HeadingAdapter extends RecyclerView.Adapter<HeadingAdapter.HeadingV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HeadingViewModel headingViewModel, int i) {
+    public void onBindViewHolder(@NonNull HeadingViewModel headingViewModel, final int i) {
         headingViewModel.mHeading.setText(selectDiningArray[i]);
+        headingViewModel.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.setUpDrive(i - 1);
+            }
+        });
     }
 
     @Override
@@ -40,10 +53,16 @@ public class HeadingAdapter extends RecyclerView.Adapter<HeadingAdapter.HeadingV
     class HeadingViewModel extends RecyclerView.ViewHolder{
 
         TextView mHeading;
+        View view;
 
         HeadingViewModel(@NonNull View itemView) {
             super(itemView);
             mHeading = itemView.findViewById(R.id.select_heading_tv);
+            view = itemView;
         }
+    }
+
+    public interface HeadingSetPreference{
+        void setUpDrive(int pos);
     }
 }

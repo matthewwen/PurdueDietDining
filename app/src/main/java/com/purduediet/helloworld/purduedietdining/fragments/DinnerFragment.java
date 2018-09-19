@@ -23,8 +23,10 @@ import com.purduediet.helloworld.purduedietdining.userInterface.MainActivity;
 
 import java.util.ArrayList;
 
-public class DinnerFragment extends Fragment implements MainAdapter.MainActivityRecycleActivity,
-        RecyclerSectionItemDecoration.OpenDiningActivity{
+public class DinnerFragment extends Fragment
+        implements MainAdapter.MainActivityRecycleActivity,
+        RecyclerSectionItemDecoration.OpenDiningActivity,
+        HeadingAdapter.HeadingSetPreference{
 
     RecyclerView recyclerView; //the breakfast recycle view
     ArrayList<ItemFood> allItemFood; //All Breakfast options
@@ -98,7 +100,12 @@ public class DinnerFragment extends Fragment implements MainAdapter.MainActivity
     public void showListOfDiningCourts() {
         mAdapter.clear();
         recyclerView.removeItemDecoration(sectionItemDecoration);
-        HeadingAdapter adapter = new HeadingAdapter();
+        HeadingAdapter adapter = new HeadingAdapter(this);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void setUpDrive(int pos) {
+
     }
 }
