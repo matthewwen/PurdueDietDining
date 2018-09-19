@@ -38,9 +38,9 @@ public class RecyclerSectionItemDecoration extends RecyclerView.ItemDecoration {
             outRect.top = headerOffset;
         }
 
-        view.setOnClickListener(new View.OnClickListener() {
+        header.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 context.showListOfDiningCourts();
             }
         });
