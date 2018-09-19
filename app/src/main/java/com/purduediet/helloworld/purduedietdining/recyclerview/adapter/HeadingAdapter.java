@@ -1,4 +1,4 @@
-package com.purduediet.helloworld.purduedietdining.adapter;
+package com.purduediet.helloworld.purduedietdining.recyclerview.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

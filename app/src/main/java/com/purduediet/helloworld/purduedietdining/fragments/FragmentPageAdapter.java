@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.purduediet.helloworld.purduedietdining.adapter.MainAdapter;
-
 public class FragmentPageAdapter extends FragmentPagerAdapter {
 
     public static final String[] HEADINGS = new String[]{"BREAKFAST", "LUNCH", "DINNER"};

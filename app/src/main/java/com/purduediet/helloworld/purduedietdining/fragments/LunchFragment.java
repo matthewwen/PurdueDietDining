@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.purduediet.helloworld.purduedietdining.R;
-import com.purduediet.helloworld.purduedietdining.adapter.HeadingAdapter;
-import com.purduediet.helloworld.purduedietdining.adapter.MainAdapter;
-import com.purduediet.helloworld.purduedietdining.adapter.RecyclerSectionItemDecoration;
+import com.purduediet.helloworld.purduedietdining.recyclerview.adapter.HeadingAdapter;
+import com.purduediet.helloworld.purduedietdining.recyclerview.adapter.MainAdapter;
+import com.purduediet.helloworld.purduedietdining.recyclerview.RecyclerSectionItemDecoration;
 import com.purduediet.helloworld.purduedietdining.data.FoodData;
 import com.purduediet.helloworld.purduedietdining.database.DataMethod;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;

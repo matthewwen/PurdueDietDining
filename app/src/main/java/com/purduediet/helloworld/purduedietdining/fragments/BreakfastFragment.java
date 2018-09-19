@@ -1,13 +1,11 @@
 package com.purduediet.helloworld.purduedietdining.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,18 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.purduediet.helloworld.purduedietdining.R;
-import com.purduediet.helloworld.purduedietdining.adapter.HeadingAdapter;
-import com.purduediet.helloworld.purduedietdining.adapter.MainAdapter;
-import com.purduediet.helloworld.purduedietdining.adapter.RecyclerSectionItemDecoration;
+import com.purduediet.helloworld.purduedietdining.recyclerview.adapter.HeadingAdapter;
+import com.purduediet.helloworld.purduedietdining.recyclerview.adapter.MainAdapter;
+import com.purduediet.helloworld.purduedietdining.recyclerview.RecyclerSectionItemDecoration;
 import com.purduediet.helloworld.purduedietdining.data.FoodData;
-import com.purduediet.helloworld.purduedietdining.database.DataContract;
 import com.purduediet.helloworld.purduedietdining.database.DataMethod;
-import com.purduediet.helloworld.purduedietdining.objects.DiningCourt;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
-import com.purduediet.helloworld.purduedietdining.preference.PreferenceUtils;
-import com.purduediet.helloworld.purduedietdining.userInterface.DiningCourtActivity;
-import com.purduediet.helloworld.purduedietdining.userInterface.ItemFoodActivity;
-import com.purduediet.helloworld.purduedietdining.userInterface.MainActivity;
 
 import java.util.ArrayList;
 

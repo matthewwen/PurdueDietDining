@@ -1,4 +1,4 @@
-package com.purduediet.helloworld.purduedietdining.adapter;
+package com.purduediet.helloworld.purduedietdining.recyclerview;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.purduediet.helloworld.purduedietdining.R;
 
@@ -37,14 +38,6 @@ public class RecyclerSectionItemDecoration extends RecyclerView.ItemDecoration {
         if (sectionCallback.isSection(pos)) {
             outRect.top = headerOffset;
         }
-
-        header.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.showListOfDiningCourts();
-            }
-        });
-
     }
 
     public interface OpenDiningActivity{
@@ -72,8 +65,18 @@ public class RecyclerSectionItemDecoration extends RecyclerView.ItemDecoration {
                 drawHeader(c, child, headerView);
                 previousHeader = title;
             }
+
         }
+
+        headerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(parent.getContext(), "Hello There", Toast.LENGTH_SHORT).show();
+             }
+        });
     }
+
+
 
     private void drawHeader(Canvas c, View child, View headerView) {
         c.save();

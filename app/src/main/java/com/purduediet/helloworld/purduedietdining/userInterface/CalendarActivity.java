@@ -3,7 +3,6 @@ package com.purduediet.helloworld.purduedietdining.userInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -14,23 +13,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.LinearLayout;
 
 import com.purduediet.helloworld.purduedietdining.R;
-import com.purduediet.helloworld.purduedietdining.adapter.SecondAdapter;
+import com.purduediet.helloworld.purduedietdining.recyclerview.adapter.SecondAdapter;
 import com.purduediet.helloworld.purduedietdining.database.DataContract;
 import com.purduediet.helloworld.purduedietdining.database.DataHelper;
 import com.purduediet.helloworld.purduedietdining.database.DataMethod;
-import com.purduediet.helloworld.purduedietdining.database.DataProvider;
 import com.purduediet.helloworld.purduedietdining.objects.ItemFood;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity {
 
